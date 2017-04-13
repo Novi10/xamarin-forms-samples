@@ -243,6 +243,11 @@
                           Detail="Display the matrix for non-affine transforms"
                           Command="{Binding NavigateCommand}"
                           CommandParameter="{x:Type local:Transforms.ShowNonAffineMatrixPage}" />
+
+                <TextCell Text="Rotation 3D"
+                          Detail="Rotate a 2D bitmap in 3D space"
+                          Command="{Binding NavigateCommand}"
+                          CommandParameter="{x:Type local:Transforms.Rotation3DPage}" />
             </TableSection>
         </TableRoot>
     </TableView>

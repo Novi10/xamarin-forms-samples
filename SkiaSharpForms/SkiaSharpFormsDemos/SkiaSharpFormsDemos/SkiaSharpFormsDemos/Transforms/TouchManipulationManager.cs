@@ -22,7 +22,7 @@ namespace SkiaSharpFormsDemos.Transforms
                 SKPoint oldVector = prevPoint - pivotPoint;
                 SKPoint newVector = newPoint - pivotPoint;
 
-                // Avoid rotation if fingers are close to center
+                // Avoid rotation if fingers are too close to center
                 if (Magnitude(newVector) > 25 && Magnitude(oldVector) > 25)
                 {
                     float prevAngle = (float)Math.Atan2(oldVector.Y, oldVector.X);
@@ -76,9 +76,6 @@ namespace SkiaSharpFormsDemos.Transforms
 
             if (Mode == TouchManipulationMode.AnisotropicScale)
             {
-                //scaleX = (newPoint.X - pivotPoint.X) / (prevPoint.X - pivotPoint.X);
-                //scaleY = (newPoint.Y - pivotPoint.Y) / (prevPoint.Y - pivotPoint.Y);
-
                 scaleX = newVector.X / oldVector.X;
                 scaleY = newVector.Y / oldVector.Y;
 
@@ -87,18 +84,7 @@ namespace SkiaSharpFormsDemos.Transforms
                      Mode == TouchManipulationMode.ScaleRotate ||
                      Mode == TouchManipulationMode.ScaleDualRotate)
             {
-                // Determine dominant scaling direction
-                //          if (Math.Abs(newVector.X - oldVector.X) > Math.Abs(newVector.Y - oldVector.Y))
-                //           {
-                //               scaleX = scaleY = newVector.X / oldVector.X;
-                //          }
-                //         else
-                ////        {
-                //          scaleX = scaleY = newVector.Y / oldVector.Y;
-                //     }
-
-
-                scaleX = scaleY = Magnitude(newVector) / Magnitude(oldVector); //  newPoint - pivotPoint) / Magnitude(prevPoint - pivotPoint);
+                scaleX = scaleY = Magnitude(newVector) / Magnitude(oldVector);
             }
 
             if (!float.IsNaN(scaleX) && !float.IsInfinity(scaleX) &&
@@ -109,16 +95,11 @@ namespace SkiaSharpFormsDemos.Transforms
             }
 
             return touchMatrix;
-
-            //    return SKMatrix.MakeScale(scaleX, scaleY, pivotPoint.X, pivotPoint.Y);
         }
-
 
         float Magnitude(SKPoint point)
         {
             return (float)Math.Sqrt(Math.Pow(point.X, 2) + Math.Pow(point.Y, 2));
         }
-
-
     }
 }

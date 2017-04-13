@@ -42,14 +42,17 @@ namespace SkiaSharpFormsDemos.Transforms
         {
             // Invert the matrix
             SKMatrix inverseMatrix;
-            Matrix.TryInvert(out inverseMatrix);
 
-            // Transform the point using the inverted matrix
-            SKPoint transformedPoint = inverseMatrix.MapPoint(location);
+            if (Matrix.TryInvert(out inverseMatrix))
+            {
+                // Transform the point using the inverted matrix
+                SKPoint transformedPoint = inverseMatrix.MapPoint(location);
 
-            // Check if it's in the untransformed bitmap rectangle
-            SKRect rect = new SKRect(0, 0, bitmap.Width, bitmap.Height);
-            return rect.Contains(transformedPoint);
+                // Check if it's in the untransformed bitmap rectangle
+                SKRect rect = new SKRect(0, 0, bitmap.Width, bitmap.Height);
+                return rect.Contains(transformedPoint);
+            }
+            return false;
         }
 
         public void ProcessTouchEvent(long id, TouchActionType type, SKPoint location)
@@ -87,12 +90,6 @@ namespace SkiaSharpFormsDemos.Transforms
         {
             TouchManipulationInfo[] infos = new TouchManipulationInfo[touchDictionary.Count];
             touchDictionary.Values.CopyTo(infos, 0);
-
-            if (infos.Length == 0)
-            {
-                return;
-            }
-
             SKMatrix touchMatrix = SKMatrix.MakeIdentity();
 
             if (infos.Length == 1)

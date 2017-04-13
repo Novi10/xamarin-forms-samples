@@ -35,7 +35,7 @@ namespace SkiaSharpFormsDemos.Transforms
             IList<View> children = ((Layout<View>)slider.Parent).Children;
             int index = children.IndexOf(slider);
             Label label = (Label)children[index + 1];
-            label.Text = (slider.Value / 100).ToString("F3");
+            label.Text = (slider.Value / 100).ToString("F4");
 
             if (canvasView != null)
             {

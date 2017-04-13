@@ -108,6 +108,9 @@
     <Compile Include="Transforms\PathTransformPage.cs" />
     <Compile Include="Transforms\RotateAndRevolvePage.cs" />
     <Compile Include="Transforms\RotatedTextPage.cs" />
+    <Compile Include="Transforms\Rotation3DPage.xaml.cs">
+      <DependentUpon>Rotation3DPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Transforms\ShowAffineMatrixPage.xaml.cs">
       <DependentUpon>ShowAffineMatrixPage.xaml</DependentUpon>
     </Compile>
@@ -294,6 +297,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Transforms\TestPerspectivePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Transforms\Rotation3DPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
