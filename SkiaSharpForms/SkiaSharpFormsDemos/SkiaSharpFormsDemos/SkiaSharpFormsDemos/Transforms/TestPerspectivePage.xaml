@@ -29,16 +29,18 @@
 
         <Slider x:Name="persp0Slider"
                 Grid.Row="0"
-                ValueChanged="sliderValueChanged" />
+                ValueChanged="OnPersp0SliderValueChanged" />
 
-        <Label Text="0.000"
+        <Label x:Name="persp0Label"
+               Text="Persp0 = 0.0000"
                Grid.Row="1" />
 
         <Slider x:Name="persp1Slider"
                 Grid.Row="2"
-                ValueChanged="sliderValueChanged" />
+                ValueChanged="OnPersp1SliderValueChanged" />
 
-        <Label Text="0.000"
+        <Label x:Name="persp1Label"
+               Text="Persp1 = 0.0000"
                Grid.Row="3" />
 
         <skia:SKCanvasView x:Name="canvasView"

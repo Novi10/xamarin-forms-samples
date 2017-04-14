@@ -12,6 +12,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -30,7 +32,7 @@
 
         <Slider x:Name="xRotateSlider"
                 Grid.Row="0"
-                ValueChanged="sliderValueChanged" />
+                ValueChanged="OnSliderValueChanged" />
 
         <Label Text="{Binding Source={x:Reference xRotateSlider},
                               Path=Value,
@@ -39,7 +41,7 @@
 
         <Slider x:Name="yRotateSlider"
                 Grid.Row="2"
-                ValueChanged="sliderValueChanged" />
+                ValueChanged="OnSliderValueChanged" />
 
         <Label Text="{Binding Source={x:Reference yRotateSlider},
                               Path=Value,
@@ -48,15 +50,26 @@
 
         <Slider x:Name="zRotateSlider"
                 Grid.Row="4"
-                ValueChanged="sliderValueChanged" />
+                ValueChanged="OnSliderValueChanged" />
 
         <Label Text="{Binding Source={x:Reference zRotateSlider},
                               Path=Value,
                               StringFormat='Z-Axis Rotation = {0:F0}'}"
                Grid.Row="5" />
 
+        <Slider x:Name="depthSlider"
+                Grid.Row="6"
+                Maximum="2000"
+                Minimum="200"
+                ValueChanged="OnSliderValueChanged" />
+
+        <Label Grid.Row="7"
+               Text="{Binding Source={x:Reference depthSlider},
+                              Path=Value,
+                              StringFormat='Depth = {0:F0}'}" />
+
         <skia:SKCanvasView x:Name="canvasView"
-                           Grid.Row="6"
+                           Grid.Row="8"
                            PaintSurface="OnCanvasViewPaintSurface" />
     </Grid>
 </ContentPage>

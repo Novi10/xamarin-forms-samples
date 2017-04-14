@@ -244,10 +244,16 @@
                           Command="{Binding NavigateCommand}"
                           CommandParameter="{x:Type local:Transforms.ShowNonAffineMatrixPage}" />
 
+                <!-- 3D Rotations -->
                 <TextCell Text="Rotation 3D"
                           Detail="Rotate a 2D bitmap in 3D space"
                           Command="{Binding NavigateCommand}"
                           CommandParameter="{x:Type local:Transforms.Rotation3DPage}" />
+                
+                <TextCell Text="Animated Rotation 3D"
+                          Detail="Animate a 2D object in 3D space"
+                          Command="{Binding NavigateCommand}"
+                          CommandParameter="{x:Type local:Transforms.AnimatedRotation3DPage}" />
             </TableSection>
         </TableRoot>
     </TableView>

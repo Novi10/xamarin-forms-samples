@@ -28,19 +28,18 @@ namespace SkiaSharpFormsDemos.Transforms
             }
         }
 
-        void sliderValueChanged(object sender, ValueChangedEventArgs args)
+        void OnPersp0SliderValueChanged(object sender, ValueChangedEventArgs args)
         {
-            // UWP Slider can't handle tiny values, hence...
             Slider slider = (Slider)sender;
-            IList<View> children = ((Layout<View>)slider.Parent).Children;
-            int index = children.IndexOf(slider);
-            Label label = (Label)children[index + 1];
-            label.Text = (slider.Value / 100).ToString("F4");
+            persp0Label.Text = String.Format("Persp0 = {0:F4}", slider.Value);
+            canvasView.InvalidateSurface();
+        }
 
-            if (canvasView != null)
-            {
-                canvasView.InvalidateSurface();
-            }
+        void OnPersp1SliderValueChanged(object sender, ValueChangedEventArgs args)
+        {
+            Slider slider = (Slider)sender;
+            persp1Label.Text = String.Format("Persp1 = {0:F4}", slider.Value);
+            canvasView.InvalidateSurface();
         }
 
         void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)

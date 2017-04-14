@@ -84,6 +84,7 @@
     <Compile Include="TouchEffect.cs" />
     <Compile Include="TouchPoint.cs" />
     <Compile Include="Transforms\AccumulatedTranslatePage.cs" />
+    <Compile Include="Transforms\AnimatedRotation3DPage.cs" />
     <Compile Include="Transforms\AnisotropicScalingPage.cs" />
     <Compile Include="Transforms\AnisotropicTextPage.cs" />
     <Compile Include="Transforms\BasicRotatePage.xaml.cs">
@@ -104,6 +105,7 @@
     <Compile Include="Transforms\HendecagramAnimationPage.cs" />
     <Compile Include="Transforms\HendecagramArrayPage.cs" />
     <Compile Include="Transforms\IsotropicScalingPage.cs" />
+    <Compile Include="Transforms\Matrix3D.cs" />
     <Compile Include="Transforms\ObliqueTextPage.cs" />
     <Compile Include="Transforms\PathTransformPage.cs" />
     <Compile Include="Transforms\RotateAndRevolvePage.cs" />
