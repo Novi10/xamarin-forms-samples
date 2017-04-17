@@ -37,13 +37,14 @@ namespace SkiaSharpFormsDemos.Transforms
                 bitmap = SKBitmap.Decode(skStream);
             }
 
-            touchPoints[0] = new TouchPoint(50, 50);                  // upper-left corner
-            touchPoints[1] = new TouchPoint(bitmap.Width + 50, 50);   // upper-right corner
-            touchPoints[2] = new TouchPoint(50, bitmap.Height + 50);  // lower-left corner
-            touchPoints[3] = new TouchPoint(bitmap.Width + 50, bitmap.Height + 50);     // lower-right corner
+            touchPoints[0] = new TouchPoint(100, 100);                   // upper-left corner
+            touchPoints[1] = new TouchPoint(bitmap.Width + 100, 100);    // upper-right corner
+            touchPoints[2] = new TouchPoint(100, bitmap.Height + 100);   // lower-left corner
+            touchPoints[3] = new TouchPoint(bitmap.Width + 100, bitmap.Height + 100);     // lower-right corner
 
             bitmapSize = new SKSize(bitmap.Width, bitmap.Height);
-            matrix = ComputeMatrix(bitmapSize, touchPoints[0].Center, touchPoints[1].Center, touchPoints[2].Center, touchPoints[3].Center);
+            matrix = ComputeMatrix(bitmapSize, touchPoints[0].Center, touchPoints[1].Center, 
+                                               touchPoints[2].Center, touchPoints[3].Center);
         }
 
         void OnTouchEffectAction(object sender, TouchActionEventArgs args)
@@ -60,12 +61,13 @@ namespace SkiaSharpFormsDemos.Transforms
 
             if (touchPointMoved)
             {
-                matrix = ComputeMatrix(bitmapSize, touchPoints[0].Center, touchPoints[1].Center, touchPoints[2].Center, touchPoints[3].Center);
+                matrix = ComputeMatrix(bitmapSize, touchPoints[0].Center, touchPoints[1].Center, 
+                                                   touchPoints[2].Center, touchPoints[3].Center);
                 canvasView.InvalidateSurface();
             }
         }
 
-        SKMatrix ComputeMatrix(SKSize size, SKPoint ptUL, SKPoint ptUR, SKPoint ptLL, SKPoint ptLR)
+        static SKMatrix ComputeMatrix(SKSize size, SKPoint ptUL, SKPoint ptUR, SKPoint ptLL, SKPoint ptLR)
         {
             // Scale transform
             SKMatrix S = SKMatrix.MakeScale(1 / size.Width, 1 / size.Height);
@@ -83,11 +85,11 @@ namespace SkiaSharpFormsDemos.Transforms
             };
 
             // Non-Affine transform
-            float den = A.ScaleX * A.ScaleY - A.SkewY * A.SkewX;
-            float a = (A.ScaleY * ptLR.X - A.SkewX * ptLR.Y +
-                       A.SkewX * A.TransY - A.ScaleY * A.TransX) / den;
-            float b = (A.ScaleX * ptLR.Y - A.SkewY * ptLR.X +
-                       A.SkewY * A.TransX - A.ScaleX * A.TransY) / den;
+            SKMatrix inverseA;
+            A.TryInvert(out inverseA);
+            SKPoint abPoint = inverseA.MapPoint(ptLR);
+            float a = abPoint.X;
+            float b = abPoint.Y;
 
             float scaleX = a / (a + b - 1);
             float scaleY = b / (a + b - 1);
@@ -101,10 +103,11 @@ namespace SkiaSharpFormsDemos.Transforms
                 Persp2 = 1
             };
 
-            SKMatrix intermediate;
-            SKMatrix.Concat(ref intermediate, N, S);
-            SKMatrix result;
-            SKMatrix.Concat(ref result, A, intermediate);
+            // Multiply S * N * A
+            SKMatrix result = SKMatrix.MakeIdentity();
+            SKMatrix.PostConcat(ref result, S);
+            SKMatrix.PostConcat(ref result, N);
+            SKMatrix.PostConcat(ref result, A);
 
             return result;
         }

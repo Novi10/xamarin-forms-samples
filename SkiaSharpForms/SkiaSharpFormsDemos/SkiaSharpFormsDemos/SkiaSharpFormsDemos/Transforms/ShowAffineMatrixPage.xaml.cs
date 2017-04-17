@@ -65,7 +65,7 @@ namespace SkiaSharpFormsDemos.Transforms
             }
         }
 
-        SKMatrix ComputeMatrix(SKSize size, SKPoint ptUL, SKPoint ptUR, SKPoint ptLL)
+        static SKMatrix ComputeMatrix(SKSize size, SKPoint ptUL, SKPoint ptUR, SKPoint ptLL)
         {
             // Scale transform
             SKMatrix S = SKMatrix.MakeScale(1 / size.Width, 1 / size.Height);

@@ -126,6 +126,7 @@
     <Compile Include="Transforms\SkewExperimentPage.xaml.cs">
       <DependentUpon>SkewExperimentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Transforms\TaperTransform.cs" />
     <Compile Include="Transforms\TaperTransformPage.xaml.cs">
       <DependentUpon>TaperTransformPage.xaml</DependentUpon>
     </Compile>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
@@ -31,14 +30,14 @@ namespace SkiaSharpFormsDemos.Transforms
         void OnPersp0SliderValueChanged(object sender, ValueChangedEventArgs args)
         {
             Slider slider = (Slider)sender;
-            persp0Label.Text = String.Format("Persp0 = {0:F4}", slider.Value);
+            persp0Label.Text = String.Format("Persp0 = {0:F4}", slider.Value / 100);
             canvasView.InvalidateSurface();
         }
 
         void OnPersp1SliderValueChanged(object sender, ValueChangedEventArgs args)
         {
             Slider slider = (Slider)sender;
-            persp1Label.Text = String.Format("Persp1 = {0:F4}", slider.Value);
+            persp1Label.Text = String.Format("Persp1 = {0:F4}", slider.Value / 100);
             canvasView.InvalidateSurface();
         }
 
@@ -55,17 +54,17 @@ namespace SkiaSharpFormsDemos.Transforms
             perspectiveMatrix.Persp0 = (float)persp0Slider.Value / 100;
             perspectiveMatrix.Persp1 = (float)persp1Slider.Value / 100;
 
-            // Coordinates to center bitmap on canvas
-            float x = (info.Width - bitmap.Width) / 2;
-            float y = (info.Height - bitmap.Height) / 2;
-
-            // Center of bitmap
-            float xCenter = x + bitmap.Width / 2;
-            float yCenter = y + bitmap.Height / 2;
+            // Center of screen
+            float xCenter = info.Width / 2;
+            float yCenter = info.Height / 2;
 
             SKMatrix matrix = SKMatrix.MakeTranslation(-xCenter, -yCenter);
             SKMatrix.PostConcat(ref matrix, perspectiveMatrix);
             SKMatrix.PostConcat(ref matrix, SKMatrix.MakeTranslation(xCenter, yCenter));
+
+            // Coordinates to center bitmap on canvas
+            float x = xCenter - bitmap.Width / 2;
+            float y = yCenter - bitmap.Height / 2;
 
             canvas.SetMatrix(matrix);
             canvas.DrawBitmap(bitmap, x, y);
