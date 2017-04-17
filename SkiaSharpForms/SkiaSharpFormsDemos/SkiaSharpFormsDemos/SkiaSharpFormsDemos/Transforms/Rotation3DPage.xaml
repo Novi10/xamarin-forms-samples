@@ -59,8 +59,8 @@
 
         <Slider x:Name="depthSlider"
                 Grid.Row="6"
-                Maximum="2000"
-                Minimum="200"
+                Maximum="2500"
+                Minimum="250"
                 ValueChanged="OnSliderValueChanged" />
 
         <Label Grid.Row="7"

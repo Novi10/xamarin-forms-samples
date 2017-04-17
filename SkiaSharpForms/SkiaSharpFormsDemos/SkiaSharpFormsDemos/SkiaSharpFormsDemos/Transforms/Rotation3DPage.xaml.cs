@@ -12,9 +12,6 @@ namespace SkiaSharpFormsDemos.Transforms
     public partial class Rotation3DPage : ContentPage
     {
         SKBitmap bitmap;
-        //     SK3dView threeDView = new SK3dView();
-
-     //   SKMatrix44 matrix44 = SKMatrix44.CreateIdentity();
 
         public Rotation3DPage()
         {
